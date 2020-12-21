@@ -5,7 +5,7 @@ const BlogLayout = ({ children }) => {
 
     <>
       <header>
-        <h1>Redwood Blog</h1>
+        <h1>JackPoint</h1>
         <nav>
           <ul>
             <li>
