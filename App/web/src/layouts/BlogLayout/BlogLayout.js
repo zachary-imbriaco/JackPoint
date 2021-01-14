@@ -11,6 +11,10 @@ const BlogLayout = ({ children }) => {
             <li>
               <Link to={routes.about()}>About</Link>
             </li>
+            <li>
+              <Link to={routes.sheet()}>Sheet</Link>
+
+            </li>
           </ul>
         </nav>
       </header>

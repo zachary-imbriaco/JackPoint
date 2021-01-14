@@ -4,12 +4,16 @@ import BlogLayout from '../../layouts/BlogLayout/BlogLayout'
   
 const SheetPage = () => {
   const [sheet, setSheet] = useState('')
-  const [parsed, setParsed] = useState({characters: {character: {metatype: '', alias: '', qualities: {quality: [{}]}}}})
+  const [parsed, setParsed] = useState({characters: {character: {metatype: '', alias: '', cyberwares: {cyberware: []}, qualities: {quality: [{}]}}}})
   const [qual, setQual] = useState([])
+  const [ware, setWare] = useState([])
+  const [spells, setSpells] = useState([])
+  const [powers, setPowers] = useState([])
 
   const handleParse = () => {
     setParsed(JSON.parse(sheet))
     setQual(parsed.characters.character.qualities.quality)
+    setWare(parsed.characters.character.cyberwares.cyberware)
     console.log(parsed)
   }
 
@@ -20,7 +24,11 @@ const SheetPage = () => {
     <p>Handle: {parsed.characters.character.alias}</p>
     <p>Metatype: {parsed.characters.character.metatype}</p>
     <p>Qualities: {qual.map((value, index) => {
-      return <li key={index}>{value.name} [{value.notes}]</li>})}</p>
+      return <li key={index}>{value.name} [{value.notes}]</li>
+    })}</p>
+    <p>Cyber/Bioware: {ware.map((value, index) => {
+      return <li key={index}>{value.name}</li>
+    })}</p>
     </BlogLayout>
 }
 
