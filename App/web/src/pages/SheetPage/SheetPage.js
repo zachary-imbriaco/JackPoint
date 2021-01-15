@@ -9,6 +9,7 @@ const SheetPage = () => {
   const [ware, setWare] = useState([])
   const [spells, setSpells] = useState([])
   const [powers, setPowers] = useState([])
+  const [gear, setGear] = useState([])
 
   const handleParse = () => {
     setParsed(JSON.parse(sheet))
@@ -17,7 +18,6 @@ const SheetPage = () => {
     console.log(parsed)
   }
 
-  console.log(qual)
   return <BlogLayout>
     <input type='text' placeholder='json' onChange={event => setSheet(event.target.value)}></input>
     <button onClick={event => handleParse()}>Parse</button>
@@ -27,7 +27,16 @@ const SheetPage = () => {
       return <li key={index}>{value.name} [{value.notes}]</li>
     })}</p>
     <p>Cyber/Bioware: {ware.map((value, index) => {
-      return <li key={index}>{value.name}</li>
+      if(value.children != null) {
+        const mods = value.children.cyberware
+        return <li key={index}>{value.name} ({value.rating}) 
+        <span> | {mods.map((value, index) => {
+          return <span key={index}>{value.name} ({value.rating}) | </span>
+        })}</span></li>
+      }  
+      else {
+        return <li key={index}>{value.name} ({value.rating})</li>
+      }
     })}</p>
     </BlogLayout>
 }
