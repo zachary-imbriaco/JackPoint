@@ -4,7 +4,7 @@ import BlogLayout from '../../layouts/BlogLayout/BlogLayout'
   
 const SheetPage = () => {
   const [sheet, setSheet] = useState('')
-  const [parsed, setParsed] = useState({characters: {character: {metatype: '', alias: '', cyberwares: {cyberware: []}, qualities: {quality: [{}]}}}})
+  const [parsed, setParsed] = useState({characters: {character: {metatype: '', alias: '', cyberwares: {cyberware: []}, gears: {gear:[]}, qualities: {quality: [{}]}}}})
   const [qual, setQual] = useState([])
   const [ware, setWare] = useState([])
   const [spells, setSpells] = useState([])
@@ -15,6 +15,7 @@ const SheetPage = () => {
     setParsed(JSON.parse(sheet))
     setQual(parsed.characters.character.qualities.quality)
     setWare(parsed.characters.character.cyberwares.cyberware)
+    setGear(parsed.characters.character.gears.gear)
     console.log(parsed)
   }
 
@@ -30,10 +31,33 @@ const SheetPage = () => {
       if(value.children != null) {
         const mods = value.children.cyberware
         return <li key={index}>{value.name} ({value.rating}) 
-        <span> | {mods.map((value, index) => {
-          return <span key={index}>{value.name} ({value.rating}) | </span>
-        })}</span></li>
+          <span> | {mods.map((value, index) => {
+            return <span key={index}>{value.name} ({value.rating}) | </span>
+          })}</span>
+        </li>
       }  
+      else {
+        return <li key={index}>{value.name} ({value.rating})</li>
+      }
+    })}</p>
+
+    <p>Equipment: {gear.map((value, index) => {
+      if(value.children != null) {
+        const mods = value.children.gear
+        console.log(mods)
+        if (Array.isArray(mods) == true) {
+          return <li key={index}>{value.name} ({value.rating}) 
+            <span> | {mods.map((value, index) => {
+              return <span key={index}>{value.name} ({value.rating}) | </span>
+            })}</span>
+        </li>
+        }
+        else {
+          return <li key={index}>{value.name} ({value.rating})
+            <span> | {mods.name} ({mods.rating})</span>
+          </li>
+        }
+      }
       else {
         return <li key={index}>{value.name} ({value.rating})</li>
       }
