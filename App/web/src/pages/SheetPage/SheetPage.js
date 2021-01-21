@@ -4,11 +4,13 @@ import BlogLayout from '../../layouts/BlogLayout/BlogLayout'
   
 const SheetPage = () => {
   const [sheet, setSheet] = useState('')
-  const [parsed, setParsed] = useState({characters: {character: {metatype: '', alias: '', attributes: {1: {attribute: []}}, cyberwares: {cyberware: []}, gears: {gear:[]}, qualities: {quality: [{}]}}}})
+  const [parsed, setParsed] = useState({characters: {character: {metatype: '', alias: '', stuncm: 0, stuncmnaturalrecovery: 0, physicalcm: 0, physicalcmnaturalrecovery: 0, attributes: {1: {attribute: []}}, cyberwares: {cyberware: []}, gears: {gear:[]}, qualities: {quality: [{}]}}}})
   const [qual, setQual] = useState([])
   const [ware, setWare] = useState([])
   const [att, setAtt] = useState([])
   const [gear, setGear] = useState([])
+  const [physCM, setPhysCM] = useState('')
+  const [stunCM, setStunCM] = useState('')
 
   const handleParse = () => {
     setParsed(JSON.parse(sheet))
@@ -16,6 +18,34 @@ const SheetPage = () => {
     setWare(parsed.characters.character.cyberwares.cyberware)
     setGear(parsed.characters.character.gears.gear)
     setAtt(parsed.characters.character.attributes[1].attribute)
+    let physMeter = ''
+    let stunMeter = ''
+    let physMod = 0
+    let stunMod = 0
+    for (let i = 0; i < parsed.characters.character.physicalcm; i++)
+      {
+        if ((i+1) % 3 === 0) {
+          physMod++;
+          physMeter += '[-' + physMod + ']'
+        }
+        else {
+        physMeter += '[ ]'
+        }
+      }
+
+      for (let i = 0; i < parsed.characters.character.stuncm; i++)
+      {
+        if ((i+1) % 3 === 0) {
+          stunMod++;
+          stunMeter += '[-' + stunMod + ']'
+        }
+        else {
+        stunMeter += '[ ]'
+        }
+      }
+
+    setStunCM(stunMeter)
+    setPhysCM(physMeter)
     console.log(parsed)
   }
 
@@ -30,6 +60,10 @@ const SheetPage = () => {
         }
       }
     )}</p>
+    <p>Physical Recovery: {parsed.characters.character.physicalcmnaturalrecovery}</p>
+    <p>{physCM}</p>
+    <p>Stun Recovery: {parsed.characters.character.stuncmnaturalrecovery}</p>
+    <p>{stunCM}</p>
     <p>Qualities: {qual.map((value, index) => {
       return <li key={index}>{value.name} [{value.notes}]</li>
     })}</p>
