@@ -11,6 +11,8 @@ const SheetPage = () => {
   const [gear, setGear] = useState([])
   const [physCM, setPhysCM] = useState('')
   const [stunCM, setStunCM] = useState('')
+  const [skills, setSkills] = useState([])
+  const [skillGroups, setSkillGroups] = useState([])
 
   const handleParse = () => {
     setParsed(JSON.parse(sheet))
@@ -18,6 +20,7 @@ const SheetPage = () => {
     setWare(parsed.characters.character.cyberwares.cyberware)
     setGear(parsed.characters.character.gears.gear)
     setAtt(parsed.characters.character.attributes[1].attribute)
+    
     let physMeter = ''
     let stunMeter = ''
     let physMod = 0
