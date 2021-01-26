@@ -4,7 +4,7 @@ import BlogLayout from '../../layouts/BlogLayout/BlogLayout'
   
 const SheetPage = () => {
   const [sheet, setSheet] = useState('')
-  const [parsed, setParsed] = useState({characters: {character: {metatype: '', alias: '', stuncm: 0, stuncmnaturalrecovery: 0, physicalcm: 0, physicalcmnaturalrecovery: 0, attributes: {1: {attribute: []}}, cyberwares: {cyberware: []}, gears: {gear:[]}, qualities: {quality: [{}]}}}})
+  const [parsed, setParsed] = useState({characters: {character: {metatype: '', alias: '', skills: {skill: []}, stuncm: 0, stuncmnaturalrecovery: 0, physicalcm: 0, physicalcmnaturalrecovery: 0, attributes: {1: {attribute: []}}, cyberwares: {cyberware: []}, gears: {gear:[]}, qualities: {quality: [{}]}}}})
   const [qual, setQual] = useState([])
   const [ware, setWare] = useState([])
   const [att, setAtt] = useState([])
@@ -20,7 +20,7 @@ const SheetPage = () => {
     setWare(parsed.characters.character.cyberwares.cyberware)
     setGear(parsed.characters.character.gears.gear)
     setAtt(parsed.characters.character.attributes[1].attribute)
-    
+    setSkills(parsed.characters.character.skills.skill)
     let physMeter = ''
     let stunMeter = ''
     let physMod = 0
@@ -70,6 +70,11 @@ const SheetPage = () => {
     <p>Qualities: {qual.map((value, index) => {
       return <li key={index}>{value.name} [{value.notes}]</li>
     })}</p>
+    <p>Skills:
+      {skills.map((value, index) => {
+        return <li key={index}>{value.name}: {value.rating} [{value.spec}]</li>
+      })}
+    </p>
     <p>Cyber/Bioware: {ware.map((value, index) => {
       if(value.children != null) {
         const mods = value.children.cyberware
