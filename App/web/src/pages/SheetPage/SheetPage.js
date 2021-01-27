@@ -4,7 +4,7 @@ import BlogLayout from '../../layouts/BlogLayout/BlogLayout'
   
 const SheetPage = () => {
   const [sheet, setSheet] = useState('')
-  const [parsed, setParsed] = useState({characters: {character: {metatype: '', alias: '', skills: {skill: []}, stuncm: 0, stuncmnaturalrecovery: 0, physicalcm: 0, physicalcmnaturalrecovery: 0, attributes: {1: {attribute: []}}, cyberwares: {cyberware: []}, gears: {gear:[]}, qualities: {quality: [{}]}}}})
+  const [parsed, setParsed] = useState({characters: {character: {metatype: '', alias: '', limitphysical: 0, limitmental: 0, limitsocial: 0, limitastral: 0, skills: {skill: []}, stuncm: 0, stuncmnaturalrecovery: 0, physicalcm: 0, physicalcmnaturalrecovery: 0, attributes: {1: {attribute: []}}, cyberwares: {cyberware: []}, gears: {gear:[]}, qualities: {quality: [{}]}}}})
   const [qual, setQual] = useState([])
   const [ware, setWare] = useState([])
   const [att, setAtt] = useState([])
@@ -12,7 +12,6 @@ const SheetPage = () => {
   const [physCM, setPhysCM] = useState('')
   const [stunCM, setStunCM] = useState('')
   const [skills, setSkills] = useState([])
-  const [skillGroups, setSkillGroups] = useState([])
 
   const handleParse = () => {
     setParsed(JSON.parse(sheet))
@@ -21,13 +20,14 @@ const SheetPage = () => {
     setGear(parsed.characters.character.gears.gear)
     setAtt(parsed.characters.character.attributes[1].attribute)
     setSkills(parsed.characters.character.skills.skill)
+
     let physMeter = ''
     let stunMeter = ''
     let physMod = 0
     let stunMod = 0
-    for (let i = 0; i < parsed.characters.character.physicalcm; i++)
+    for (let i = 1; i <= parsed.characters.character.physicalcm; i++)
       {
-        if ((i+1) % 3 === 0) {
+        if (i % 3 === 0) {
           physMod++;
           physMeter += '[-' + physMod + ']'
         }
@@ -63,6 +63,12 @@ const SheetPage = () => {
         }
       }
     )}</p>
+    <p> Limits: 
+        <li>Physical: {parsed.characters.character.limitphysical}</li>
+        <li>Mental: {parsed.characters.character.limitmental}</li>
+        <li>Social: {parsed.characters.character.limitsocial}</li>
+        <li>Astral: {parsed.characters.character.limitastral}</li>
+      </p>
     <p>Physical Recovery: {parsed.characters.character.physicalcmnaturalrecovery}</p>
     <p>{physCM}</p>
     <p>Stun Recovery: {parsed.characters.character.stuncmnaturalrecovery}</p>
