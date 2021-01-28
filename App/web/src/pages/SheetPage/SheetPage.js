@@ -20,6 +20,7 @@ const SheetPage = () => {
     setGear(parsed.characters.character.gears.gear)
     setAtt(parsed.characters.character.attributes[1].attribute)
     setSkills(parsed.characters.character.skills.skill)
+    console.log(skills)
 
     let physMeter = ''
     let stunMeter = ''
@@ -79,8 +80,7 @@ const SheetPage = () => {
     <p>Skills:
       {skills.map((value, index) => {
         return <li key={index}>{value.name}: {value.rating} [{value.spec}]</li>
-      })}
-    </p>
+      })}</p>
     <p>Cyber/Bioware: {ware.map((value, index) => {
       if(value.children != null) {
         const mods = value.children.cyberware
