@@ -84,11 +84,11 @@ const SheetPage = () => {
       {skills.map((value, index) => {
         return <li key={index}>{value.name}: {value.rating} [{value.spec}]</li>
       })}</p>
-      <p>Powers:
-        {powers.map((value, index) => {
-          return <li key={index}>{value.name}: {value.rating}</li>
-        })}
-      </p>
+    <p>Powers:
+      {powers.map((value, index) => {
+        return <li key={index}>{value.name}: {value.rating}</li>
+      })}
+    </p>
     <p>Cyber/Bioware: {ware.map((value, index) => {
       if(value.children != null) {
         const mods = value.children.cyberware
