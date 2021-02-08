@@ -12,6 +12,3 @@ What JackPoint is not:
 
 How it works:
     JackPoint is currently designed to take an input of a JSON export retrieved from Chummer, which it then translates into the desired character sheet format.  You may then store these character sheets on the server, and share them via a direct link to the sheet in question.
-
-End Goals For JackPoint:
-    Current end-goals for Chummer include allowing dynamic formatting of character sheets via drag-and-drop tabs, allowing users to put the most important information for them where they want it.  In addition, enabling users to create new character sheets would be ideal, or at the very least to update existing sheets with new information.
